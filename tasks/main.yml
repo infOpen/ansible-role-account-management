@@ -31,7 +31,7 @@
 - name  : Create user authorized-keys file
   authorized_key :
     user  : "{{ item.0.name }}"
-    key   : "{{ lookup('file', {{ item.1.filename }}) }}"
+    key   : "{{ lookup('file', item.1.filename) }}"
     state : "{{ item.1.state | default('present') }}"
     key_options : "{{ item.1.key_options | default('') }}"
     exclusive   : "{{ item.0.exclusive_public_keys | default(True) }}"
