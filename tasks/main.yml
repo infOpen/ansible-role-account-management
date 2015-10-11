@@ -45,7 +45,7 @@
   register   : home_users
   with_items : "{{ account_management_users }}"
   when :
-    - "{{ item.name }} == 'present'"
+    - "'{{ item.state }}' == 'present'"
 
 
 - name  : Change permissions for user home directory
@@ -58,4 +58,4 @@
     - "{{ account_management_users }}"
     - "{{ home_users.results }}"
   when :
-    - "{{ item.0.name }} == 'present'"
+    - "'{{ item.0.state }}' == 'present'"
