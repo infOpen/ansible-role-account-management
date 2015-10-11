@@ -5,7 +5,7 @@
 - name  : Create groups
   group :
     name   : "{{ item.name }}"
-    gid    : "{{ item.gid | default(False) }}"
+    gid    : "{{ item.gid | default(omit) }}"
     state  : "{{ item.state | default('present') }}"
     system : "{{ item.is_system | default(False) }}"
   with_items : "{{ account_management_groups }}"
@@ -26,5 +26,5 @@
     state       : "{{ item.state | default('present') }}"
     remove      : "{{ item.remove | default(False) }}"
     #skeleton    : "{{ item.skeleton | default(False) }}"
-    uid         : "{{ item.uid | default(False) }}"
+    uid         : "{{ item.uid | default(omit) }}"
   with_items : "{{ account_management_users }}"
