@@ -41,7 +41,7 @@
 
 
 - name       : Get home for each users
-  command    : "~{{ item.name }}"
+  command    : "echo ~{{ item.name }}"
   register   : home_users
   with_items : "{{ account_management_users }}"
 
