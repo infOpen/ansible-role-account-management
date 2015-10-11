@@ -40,10 +40,18 @@
     - "authorized_public_keys"
 
 
+- name       : Get home for each users
+  command    : "~{{ item.name }}"
+  register   : home_users
+  with_items : "{{ account_management_users }}"
+
+
 - name  : Change permissions for user home directory
   file  :
-    dest    : "{{ lookup('pipe', '~{{ item.name }}') }}"
-    group   : "{{item.name}}"
-    owner   : "{{item.name}}"
-    mode    : "{{ item.home_mode | default('0700') }}"
-  with_items: "{{ account_management_users }}"
+    dest    : "{{ item.1 }}"
+    group   : "{{ item.0.name }}"
+    owner   : "{{ item.0.name }}"
+    mode    : "{{ item.0.home_mode | default('0700') }}"
+  with_together:
+    - "{{ account_management_users }}"
+    - "{{ home_users }}"
