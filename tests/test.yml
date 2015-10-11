@@ -1,0 +1,36 @@
+---
+
+# Tests for account-management role
+
+- hosts: localhost
+  remote_user: root
+  vars :
+    account_management_groups :
+      - name         : my-group
+        gid          : 1500
+        state        : absent
+        is_system    : True
+        sudo_rules   : []
+        sudo_sub_dir : "groups"
+    account_management_users :
+      - name         : my-user
+        append       : False
+        comment      : "Foobar"
+        createHome   : False
+        homeMode     : 0750
+        group        : "my-user"
+        groups       : []
+        uid          : 1500
+        password     : "qsdqdqsd"
+        state        : absent
+        is_system    : True
+        remove       : True
+        skeleton     : /skels/foo
+        home         : "/var/foo"
+        shell        : "/bin/sh"
+        sudo_rules   : []
+        sudo_sub_dir : "users"
+        authorized_public_keys : []
+        exclusive_public_keys  : False
+  roles:
+    - ansible-role-account-management

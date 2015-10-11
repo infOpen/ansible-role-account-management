@@ -1,0 +1,25 @@
+---
+
+galaxy_info:
+  author: Alexandre Chaussier
+  description: Install ntp package
+  company: Infopen (http://infopen.pro)
+  license: MIT
+  min_ansible_version: 1.4
+
+  platforms:
+    - name: Ubuntu
+      versions:
+        - trusty
+        - utopic
+        - vivid
+    - name: Debian
+      versions:
+        - squeeze
+        - wheezy
+        - jessy
+
+  categories:
+    - system
+
+dependencies: []

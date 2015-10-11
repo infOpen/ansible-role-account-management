@@ -1,0 +1,49 @@
+---
+
+# Main task file for account-management role
+
+- name: Load the OS specific varibles
+  include_vars: "{{ role_path }}/vars/{{ ansible_os_family }}.yml"
+
+
+# Install required packages
+- include: install_debian.yml
+  tags:
+    - install
+    - user-management
+  when: ansible_os_family == "Debian"
+
+
+- include: create_accounts.yml
+  tags:
+    - config
+    - user-management
+    - sudo
+
+
+- include: configure_sudo.yml
+  tags:
+    - config
+    - user-management
+    - sudo
+
+
+- name  : Create user authorized-keys file
+  authorized_key :
+    user  : "{{ item.0.name }}"
+    key   : "{{ lookup('file', {{ item.1.filename }}) }}"
+    state : "{{ item.1.state | default('present') }}"
+    key_options : "{{ item.1.key_options | default('') }}"
+    exclusive   : "{{ item.0.exclusive_public_keys | default(True) }}"
+  with_subelements:
+    - "{{ account_management_users }}"
+    - "authorized_public_keys"
+
+
+- name  : Change permissions for user home directory
+  file  :
+    dest    : "{{ item.home | default('/home/'item.name) }}"
+    group   : "{{item.name}}"
+    owner   : "{{item.name}}"
+    mode    : "{{ item.homemode | default('0700') }}"
+  with_items: "{{ account_management_users }}"

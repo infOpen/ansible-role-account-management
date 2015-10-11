@@ -1,0 +1,11 @@
+---
+
+# Debian install tasks
+
+- name : Install sudo (Debian)
+  apt  :
+    name             : "{{ item }}"
+    state            : present
+    update_cache     : True
+    cache_valid_time : 3600
+  with_items : "{{ account_management_packages }}"
