@@ -38,7 +38,7 @@
         sudo_sub_dir : "users"
         authorized_public_keys : []
         exclusive_public_keys  : False
-    - name         : my-user2
+      - name         : my-user2
         append       : False
         comment      : "Foobar"
         createhome   : True
