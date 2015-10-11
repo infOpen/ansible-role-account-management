@@ -41,11 +41,11 @@
 
 
 - name       : Get home for each users
-  shell      : "getent passwd {{ item.name }} | cut -d: -f6"
+  shell      : "getent passwd {{ item.name | quote }} | cut -d':' -f6"
   register   : home_users
   with_items : "{{ account_management_users }}"
   when :
-    - "{{ item.0.name }} == 'present'"
+    - "{{ item.name }} == 'present'"
 
 
 - name  : Change permissions for user home directory
