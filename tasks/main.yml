@@ -42,7 +42,7 @@
 
 - name  : Change permissions for user home directory
   file  :
-    dest    : "{{ lookup('pipe', ~{{ item.name }}) }}"
+    dest    : "{{ lookup('pipe', '~{{ item.name }}') }}"
     group   : "{{item.name}}"
     owner   : "{{item.name}}"
     mode    : "{{ item.home_mode | default('0700') }}"
