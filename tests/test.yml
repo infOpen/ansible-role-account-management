@@ -16,7 +16,7 @@
       - name         : my-user
         append       : False
         comment      : "Foobar"
-        createHome   : False
+        createHome   : True
         homeMode     : 0750
         group        : "my-user"
         groups       : []
