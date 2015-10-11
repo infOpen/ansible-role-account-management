@@ -18,6 +18,12 @@
         is_system    : True
         sudo_rules   : []
         sudo_sub_dir : "groups"
+      - name         : my-user2
+        gid          : 1500
+        state        : present
+        is_system    : True
+        sudo_rules   : []
+        sudo_sub_dir : "groups"
     account_management_users :
       - name         : my-user
         append       : False
@@ -43,7 +49,7 @@
         comment      : "Foobar"
         createhome   : True
         home_mode    : "0750"
-        group        : "my-user"
+        group        : "my-user2"
         groups       :
           - 'my-group2'
         uid          : 1500
