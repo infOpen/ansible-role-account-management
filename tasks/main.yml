@@ -41,7 +41,7 @@
 
 
 - name       : Get home for each users
-  command    : "getent passwd {{ item.name }} | cut -d: -f6"
+  shell      : "getent passwd {{ item.name }} | cut -d: -f6"
   register   : home_users
   with_items : "{{ account_management_users }}"
 
