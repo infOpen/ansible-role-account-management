@@ -19,7 +19,7 @@
         sudo_rules   : []
         sudo_sub_dir : "groups"
       - name         : my-user2
-        gid          : 1500
+        gid          : 1501
         state        : present
         is_system    : True
         sudo_rules   : []
@@ -52,7 +52,7 @@
         group        : "my-user2"
         groups       :
           - 'my-group2'
-        uid          : 1500
+        uid          : 1501
         password     : "qsdqdqsd"
         state        : present
         is_system    : True
