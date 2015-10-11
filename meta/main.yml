@@ -2,7 +2,7 @@
 
 galaxy_info:
   author: Alexandre Chaussier
-  description: Install ntp package
+  description: Configure system accounts
   company: Infopen (http://infopen.pro)
   license: MIT
   min_ansible_version: 1.4
