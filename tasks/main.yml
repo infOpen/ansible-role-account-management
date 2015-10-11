@@ -44,6 +44,8 @@
   shell      : "getent passwd {{ item.name }} | cut -d: -f6"
   register   : home_users
   with_items : "{{ account_management_users }}"
+  when :
+    - "{{ item.0.name }} == 'present'"
 
 
 - name  : Change permissions for user home directory
