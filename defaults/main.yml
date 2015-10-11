@@ -25,7 +25,7 @@ account_management_groups : []
 #   append       : False        # Add or replace add groups (Default : True)
 #   comment      : "Foobar"     # Describe user             (Default : '')
 #   createhome   : False        # Explicit                  (Default : True)
-#   home_mode    : 0750         # Permissions for home      (Default : 0700)
+#   home_mode    : "0750"       # Permissions for home      (Default : 0700)
 #   group        : "my-user"    # Primary user group        (Default : username)
 #   groups       : []           # Additionnal groups
 #   uid          : 1500         # Set the UID               (Default : False)

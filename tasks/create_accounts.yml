@@ -25,6 +25,6 @@
     shell       : "{{ item.shell | default('/usr/sbin/nologin') }}"
     state       : "{{ item.state | default('present') }}"
     remove      : "{{ item.remove | default(False) }}"
-    skeleton    : "{{ item.skeleton | default(False) }}"
+    #skeleton    : "{{ item.skeleton | default(False) }}"
     uid         : "{{ item.uid | default(False) }}"
   with_items : "{{ account_management_users }}"
