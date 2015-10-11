@@ -55,3 +55,5 @@
   with_together:
     - "{{ account_management_users }}"
     - "{{ home_users.results }}"
+  when :
+    - "{{ item.0.name }} == 'present'"
