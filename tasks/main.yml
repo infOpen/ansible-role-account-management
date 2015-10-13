@@ -40,18 +40,20 @@
     - "authorized_public_keys"
 
 
-- name       : Get home for each users
-  shell      : "getent passwd {{ item.name | quote }} | cut -d':' -f6"
-  register   : home_users
-  with_items : "{{ account_management_users }}"
+- name         : Get home for each users
+  shell        : "getent passwd {{ item.name | quote }} | cut -d':' -f6"
+  register     : home_users
+  changed_when : False
+  with_items   : "{{ account_management_users }}"
   when :
     - "'{{ item.state | default('present') }}' == 'present'"
 
 
-- name       : Get primary group for each users
-  shell      : "id -gn {{ item.name | quote }}"
-  register   : primary_group_users
-  with_items : "{{ account_management_users }}"
+- name         : Get primary group for each users
+  shell        : "id -gn {{ item.name | quote }}"
+  register     : primary_group_users
+  changed_when : False
+  with_items   : "{{ account_management_users }}"
   when :
     - "'{{ item.state | default('present') }}' == 'present'"
 
