@@ -17,6 +17,14 @@
   when: ansible_os_family == "Debian"
 
 
+# Install required packages
+- include: install_redhat.yml
+  tags:
+    - install
+    - user-management
+  when: ansible_os_family == "RedHat"
+
+
 - include: create_accounts.yml
   tags:
     - config
@@ -31,13 +39,13 @@
     - sudo
 
 
-- name  : Create user authorized-keys file
-  authorized_key :
-    user  : "{{ item.0.name }}"
-    key   : "{{ lookup('file', item.1.filename) }}"
-    state : "{{ item.1.state | default('present') }}"
-    key_options : "{{ item.1.key_options | default('') }}"
-    exclusive   : "{{ item.0.exclusive_public_keys | default(True) }}"
+- name: Create user authorized-keys file
+  authorized_key:
+    user: "{{ item.0.name }}"
+    key: "{{ lookup('file', item.1.filename) }}"
+    state: "{{ item.1.state | default('present') }}"
+    key_options: "{{ item.1.key_options | default('') }}"
+    exclusive: "{{ item.0.exclusive_public_keys | default(True) }}"
   with_subelements:
     - "{{ account_management_users }}"
     - "authorized_public_keys"
@@ -46,41 +54,41 @@
     - user-management
 
 
-- name         : Get home for each users
-  shell        : "getent passwd {{ item.name | quote }} | cut -d':' -f6"
-  register     : home_users
-  changed_when : False
-  with_items   : "{{ account_management_users }}"
-  when :
+- name: Get home for each users
+  shell: "getent passwd {{ item.name | quote }} | cut -d':' -f6"
+  register: home_users
+  changed_when: False
+  with_items: "{{ account_management_users }}"
+  when:
     - "'{{ item.state | default('present') }}' == 'present'"
   tags:
     - config
     - user-management
 
 
-- name         : Get primary group for each users
-  shell        : "id -gn {{ item.name | quote }}"
-  register     : primary_group_users
-  changed_when : False
-  with_items   : "{{ account_management_users }}"
-  when :
+- name: Get primary group for each users
+  shell: "id -gn {{ item.name | quote }}"
+  register: primary_group_users
+  changed_when: False
+  with_items: "{{ account_management_users }}"
+  when:
     - "'{{ item.state | default('present') }}' == 'present'"
   tags:
     - config
     - user-management
 
 
-- name  : Change permissions for user home directory
-  file  :
-    dest    : "{{ item.1.stdout }}"
-    group   : "{{ item.0.name }}"
-    owner   : "{{ item.2.stdout }}"
-    mode    : "{{ item.0.home_mode | default('0700') }}"
+- name: Change permissions for user home directory
+  file:
+    dest: "{{ item.1.stdout }}"
+    group: "{{ item.0.name }}"
+    owner: "{{ item.2.stdout }}"
+    mode: "{{ item.0.home_mode | default('0700') }}"
   with_together:
     - "{{ account_management_users }}"
     - "{{ home_users.results }}"
     - "{{ primary_group_users.results }}"
-  when :
+  when:
     - "'{{ item.0.state | default('present') }}' == 'present'"
   tags:
     - config

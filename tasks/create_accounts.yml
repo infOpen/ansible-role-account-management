@@ -2,29 +2,30 @@
 
 # Create accounts
 
-- name  : Create groups
-  group :
-    name   : "{{ item.name }}"
-    gid    : "{{ item.gid | default(omit) }}"
-    state  : "{{ item.state | default('present') }}"
-    system : "{{ item.is_system | default(False) }}"
-  with_items : "{{ account_management_groups }}"
+- name: Create groups
+  group:
+    name: "{{ item.name }}"
+    gid: "{{ item.gid | default(omit) }}"
+    state: "{{ item.state | default('present') }}"
+    system: "{{ item.is_system | default(False) }}"
+  with_items: "{{ account_management_groups }}"
 
 
-- name  : Create users
-  user  :
-    append      : "{{ item.append | default(True) }}"
-    name        : "{{ item.name }}"
-    comment     : "{{ item.comment | default('') }}"
-    createhome  : "{{ item.createhome | default(True) }}"
-    group       : "{{ item.group | default(omit) }}"
-    groups      : "{{ item.groups | join(',') }}"
-    home        : "{{ item.home | default(omit) }}"
-    password    : "{{ item.password | default(False) }}"
-    system      : "{{ item.is_system | default(False) }}"
-    shell       : "{{ item.shell | default('/usr/sbin/nologin') }}"
-    state       : "{{ item.state | default('present') }}"
-    remove      : "{{ item.remove | default(False) }}"
-    #skeleton    : "{{ item.skeleton | default(False) }}"
-    uid         : "{{ item.uid | default(omit) }}"
-  with_items : "{{ account_management_users }}"
+- name: Create users
+  user:
+    append: "{{ item.append | default(True) }}"
+    name: "{{ item.name }}"
+    comment: "{{ item.comment | default('') }}"
+    createhome: "{{ item.createhome | default(True) }}"
+    group: "{{ item.group | default(omit) }}"
+    groups: "{{ item.groups | join(',') }}"
+    home: "{{ item.home | default(omit) }}"
+    password: "{{ item.password | default(False) }}"
+    system: "{{ item.is_system | default(False) }}"
+    shell: "{{ item.shell | default('/usr/sbin/nologin') }}"
+    state: "{{ item.state | default('present') }}"
+    remove: "{{ item.remove | default(False) }}"
+    #skeleton: "{{ item.skeleton | default(False) }}"
+    uid: "{{ item.uid | default(omit) }}"
+  with_items: "{{ account_management_users }}"
+
