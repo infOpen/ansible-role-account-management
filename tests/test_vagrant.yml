@@ -2,8 +2,8 @@
 
 # Tests for account-management role
 
-- hosts: localhost
-  remote_user: root
+- hosts: all
+  remote_user: vagrant
   vars :
     account_management_groups :
       - name         : my-group
@@ -65,4 +65,5 @@
         authorized_public_keys : []
         exclusive_public_keys  : False
   roles:
-    - ansible-role-account-management
+    - .
+

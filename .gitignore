@@ -1,0 +1,10 @@
+# Vagrant files
+.vagrant
+/test_vagrant.yml
+
+# Swap files
+*.swp
+
+#Bundler
+.bundle
+
