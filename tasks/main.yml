@@ -4,6 +4,9 @@
 
 - name: Load the OS specific varibles
   include_vars: "{{ role_path }}/vars/{{ ansible_os_family }}.yml"
+  tags:
+    - install
+    - user-management
 
 
 # Install required packages
@@ -38,6 +41,9 @@
   with_subelements:
     - "{{ account_management_users }}"
     - "authorized_public_keys"
+  tags:
+    - config
+    - user-management
 
 
 - name         : Get home for each users
@@ -47,6 +53,9 @@
   with_items   : "{{ account_management_users }}"
   when :
     - "'{{ item.state | default('present') }}' == 'present'"
+  tags:
+    - config
+    - user-management
 
 
 - name         : Get primary group for each users
@@ -56,6 +65,9 @@
   with_items   : "{{ account_management_users }}"
   when :
     - "'{{ item.state | default('present') }}' == 'present'"
+  tags:
+    - config
+    - user-management
 
 
 - name  : Change permissions for user home directory
@@ -70,3 +82,7 @@
     - "{{ primary_group_users.results }}"
   when :
     - "'{{ item.0.state | default('present') }}' == 'present'"
+  tags:
+    - config
+    - user-management
+
