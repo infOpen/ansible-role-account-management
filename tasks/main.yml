@@ -17,14 +17,6 @@
   when: ansible_os_family == "Debian"
 
 
-# Install required packages
-- include: install_redhat.yml
-  tags:
-    - install
-    - user-management
-  when: ansible_os_family == "RedHat"
-
-
 - include: create_accounts.yml
   tags:
     - config
@@ -40,6 +32,7 @@
 
 
 - name: Create user authorized-keys file
+  become: True
   authorized_key:
     user: "{{ item.0.name }}"
     key: "{{ lookup('file', item.1.filename) }}"
@@ -55,6 +48,7 @@
 
 
 - name: Get home for each users
+  become: True
   shell: "getent passwd {{ item.name | quote }} | cut -d':' -f6"
   register: home_users
   changed_when: False
@@ -67,6 +61,7 @@
 
 
 - name: Get primary group for each users
+  become: True
   shell: "id -gn {{ item.name | quote }}"
   register: primary_group_users
   changed_when: False
@@ -79,6 +74,7 @@
 
 
 - name: Change permissions for user home directory
+  become: True
   file:
     dest: "{{ item.1.stdout }}"
     group: "{{ item.0.name }}"

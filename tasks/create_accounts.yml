@@ -3,6 +3,7 @@
 # Create accounts
 
 - name: Create groups
+  become: True
   group:
     name: "{{ item.name }}"
     gid: "{{ item.gid | default(omit) }}"
@@ -12,6 +13,7 @@
 
 
 - name: Create users
+  become: True
   user:
     append: "{{ item.append | default(True) }}"
     name: "{{ item.name }}"
