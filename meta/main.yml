@@ -18,6 +18,10 @@ galaxy_info:
         - squeeze
         - wheezy
         - jessy
+    - name: EL
+      versions:
+        - 6
+        - 7
 
   categories:
     - system
