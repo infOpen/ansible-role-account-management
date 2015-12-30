@@ -38,7 +38,7 @@
         is_system    : True
         remove       : True
         skeleton     : /skels/foo
-        home         : "/var/foo"
+        home         : "/var/foo1"
         shell        : "/bin/sh"
         sudo_rules   : []
         sudo_sub_dir : "users"
@@ -67,3 +67,7 @@
   roles:
     - .
 
+- hosts: all
+  remote_user: vagrant
+  roles:
+    - .
