@@ -2,44 +2,48 @@
 
 # Main task file for account-management role
 
-- name: Load the OS specific varibles
+- name: 'Load the OS specific varibles'
   include_vars: "{{ role_path }}/vars/{{ ansible_os_family }}.yml"
   tags:
-    - install
-    - user-management
+    - 'install'
+    - 'user-management'
 
 
 # Install required packages
-- include: install_debian.yml
+- name: 'Manage Debian family packages install'
+  include: 'install_debian.yml'
   tags:
-    - install
-    - user-management
-  when: ansible_os_family == "Debian"
+    - 'install'
+    - 'user-management'
+  when: "{{ ansible_os_family == 'Debian' }}"
 
 
 # Install required packages
-- include: install_redhat.yml
+- name: 'Manage RedHat family packages install'
+  include: 'install_redhat.yml'
   tags:
-    - install
-    - user-management
-  when: ansible_os_family == "RedHat"
+    - 'install'
+    - 'user-management'
+  when: "{{ ansible_os_family == 'RedHat' }}"
 
 
-- include: create_accounts.yml
+- name: 'Manage account create'
+  include: 'create_accounts.yml'
   tags:
-    - config
-    - user-management
-    - sudo
+    - 'config'
+    - 'user-management'
+    - 'sudo'
 
 
-- include: configure_sudo.yml
+- name: 'Manage sudo configuration'
+  include: 'configure_sudo.yml'
   tags:
-    - config
-    - user-management
-    - sudo
+    - 'config'
+    - 'user-management'
+    - 'sudo'
 
 
-- name: Create user authorized-keys file
+- name: 'Create user authorized-keys file'
   become: True
   authorized_key:
     user: "{{ item.0.name }}"
@@ -49,39 +53,39 @@
     exclusive: "{{ item.0.exclusive_public_keys | default(True) }}"
   with_subelements:
     - "{{ account_management_users }}"
-    - "authorized_public_keys"
+    - 'authorized_public_keys'
   tags:
-    - config
-    - user-management
+    - 'config'
+    - 'user-management'
 
 
-- name: Get home for each users
+- name: 'Get home for each users'
   become: True
   shell: "getent passwd {{ item.name | quote }} | cut -d':' -f6"
-  register: home_users
+  register: 'home_users'
   changed_when: False
   with_items: "{{ account_management_users }}"
   when:
-    - "'{{ item.state | default('present') }}' == 'present'"
+    - "{{ (item.state | default('present')) == 'present' }}"
   tags:
-    - config
-    - user-management
+    - 'config'
+    - 'user-management'
 
 
-- name: Get primary group for each users
+- name: 'Get primary group for each users'
   become: True
   shell: "id -gn {{ item.name | quote }}"
-  register: primary_group_users
+  register: 'primary_group_users'
   changed_when: False
   with_items: "{{ account_management_users }}"
   when:
-    - "'{{ item.state | default('present') }}' == 'present'"
+    - "{{ (item.state | default('present')) == 'present' }}"
   tags:
-    - config
-    - user-management
+    - 'config'
+    - 'user-management'
 
 
-- name: Change permissions for user home directory
+- name: 'Change permissions for user home directory'
   become: True
   file:
     dest: "{{ item.1.stdout }}"
@@ -89,13 +93,12 @@
     owner: "{{ item.2.stdout }}"
     mode: "{{ item.0.home_mode | default('0700') }}"
   with_together:
-    - account_management_users
-    - home_users.results
-    - primary_group_users.results
+    - "{{ account_management_users }}"
+    - "{{ home_users.results }}"
+    - "{{ primary_group_users.results }}"
   when:
-    - account_management_users
-    - "'{{ item.0.state | default('present') }}' == 'present'"
+    - "{{ account_management_users }}"
+    - "{{ (item.0.state | default('present')) == 'present' }}"
   tags:
-    - config
-    - user-management
-
+    - 'config'
+    - 'user-management'

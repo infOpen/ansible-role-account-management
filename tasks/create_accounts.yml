@@ -2,7 +2,7 @@
 
 # Create accounts
 
-- name: Create groups
+- name: 'Create groups'
   become: True
   group:
     name: "{{ item.name }}"
@@ -12,7 +12,7 @@
   with_items: "{{ account_management_groups }}"
 
 
-- name: Create users
+- name: 'Create users'
   become: True
   user:
     append: "{{ item.append | default(True) }}"
@@ -30,4 +30,3 @@
     #skeleton: "{{ item.skeleton | default(False) }}"
     uid: "{{ item.uid | default(omit) }}"
   with_items: "{{ account_management_users }}"
-
