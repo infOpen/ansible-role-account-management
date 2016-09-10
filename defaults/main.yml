@@ -2,11 +2,6 @@
 
 # Defaults file for account-management
 
-# List of sudoers.d subdirectory to create
-account_management_sudo_directories:
-  - 'groups'
-  - 'users'
-
 # List of groups to create
 #
 # Template:
@@ -14,8 +9,6 @@ account_management_sudo_directories:
 #   gid: 1500               # Set the GID       (Default : False)
 #   state: absent           # Should exists ?   (Default : present)
 #   is_system: True         # Is system group ? (Default : False)
-#   sudo_rules: []          # Sudo rules for the group
-#   sudo_sub_dir: "groups"  # Where store sudoers rule
 account_management_groups: []
 
 # List of users to create
@@ -36,8 +29,6 @@ account_management_groups: []
 #   skeleton: /skels/foo    # Skeleton used at create   (Default : False)
 #   home: "/var/foo"        # Home path  (Default : /home/username)
 #   shell: "/bin/sh"        # User shell (Default : /usr/sbin/nologin)
-#   sudo_rules: []          # Sudo rules for the user
-#   sudo_sub_dir: "users"           # Where store sudoers rule
 #   authorized_public_keys: []      # Public ssh keys used for authentication
 #   exclusive_public_keys: False    # Only listed keys exists in authorized-keys
 #                                   # (Default: True)

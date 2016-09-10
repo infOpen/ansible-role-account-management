@@ -3,7 +3,7 @@ account-management
 
 [![Build Status](https://travis-ci.org/infOpen/ansible-role-account-management.svg?branch=master)](https://travis-ci.org/infOpen/ansible-role-account-management)
 
-Manage users and groups, with sudo rules and authorized keys.
+Manage users and groups, with authorized keys.
 
 Requirements
 ------------
@@ -16,11 +16,6 @@ Role Variables
 
 Follow the possible variables with their default values
 
-    # List of sudoers.d subdirectory to create
-    account_management_sudo_directories :
-      - groups
-      - users
-
     # List of groups to create
     #
     # Template :
@@ -28,8 +23,6 @@ Follow the possible variables with their default values
     #   gid          : 1500         # Set the GID       (Default : False)
     #   state        : absent       # Should exists ?   (Default : present)
     #   is_system    : True         # Is system group ? (Default : False)
-    #   sudo_rules   : []           # Sudo rules for the group
-    #   sudo_sub_dir : "groups"     # Where store sudoers rule
     account_management_groups : []
 
     # List of users to create
@@ -50,8 +43,6 @@ Follow the possible variables with their default values
     #   skeleton     : /skels/foo   # Skeleton used at create   (Default : False)
     #   home         : "/var/foo"   # Home path  (Default : /home/username)
     #   shell        : "/bin/sh"    # User shell (Default : /usr/sbin/nologin)
-    #   sudo_rules   : []           # Sudo rules for the user
-    #   sudo_sub_dir : "users"      # Where store sudoers rule
     #   authorized_public_keys : [] # Public ssh keys used for authentication
     #   exclusive_public_keys  : False # Only listed keys exists in authorized-keys
     #                                  # (Default : True)
@@ -66,12 +57,6 @@ Follow the possible variables with their default values
     #       python -c 'import crypt; print crypt.crypt("password", "$1$salt$")'
     account_management_users : []
 
-
-Specific OS family vars :
-
-    # Debian
-    account_management_packages :
-      - sudo
 
 Dependencies
 ------------

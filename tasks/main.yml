@@ -2,36 +2,11 @@
 
 # Main task file for account-management role
 
-- name: 'Load the OS specific varibles'
-  include_vars: "{{ role_path }}/vars/{{ ansible_os_family }}.yml"
-  tags:
-    - 'install'
-    - 'user-management'
-
-
-# Install required packages
-- name: 'Manage Debian family packages install'
-  include: 'install_debian.yml'
-  tags:
-    - 'install'
-    - 'user-management'
-  when: "{{ ansible_os_family == 'Debian' }}"
-
-
 - name: 'Manage account create'
   include: 'create_accounts.yml'
   tags:
     - 'config'
     - 'user-management'
-    - 'sudo'
-
-
-- name: 'Manage sudo configuration'
-  include: 'configure_sudo.yml'
-  tags:
-    - 'config'
-    - 'user-management'
-    - 'sudo'
 
 
 - name: 'Create user authorized-keys file'

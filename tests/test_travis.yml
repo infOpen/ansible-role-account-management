@@ -10,20 +10,14 @@
         gid: 1500
         state: 'absent'
         is_system: True
-        sudo_rules: []
-        sudo_sub_dir: 'groups'
       - name: 'my-group2'
         gid: 1500
         state: 'present'
         is_system: True
-        sudo_rules: []
-        sudo_sub_dir: 'groups'
       - name: 'my-user2'
         gid: 1501
         state: 'present'
         is_system: True
-        sudo_rules: []
-        sudo_sub_dir: 'groups'
     account_management_users:
       - name: 'my-user'
         append: False
@@ -40,8 +34,6 @@
         skeleton: '/skels/foo'
         home: '/var/foo'
         shell: '/bin/sh'
-        sudo_rules: []
-        sudo_sub_dir: 'users'
         authorized_public_keys: []
         exclusive_public_keys: False
       - name: 'my-user2'
@@ -60,8 +52,6 @@
         skeleton: '/skels/foo'
         home: '/var/foo'
         shell: '/bin/sh'
-        sudo_rules: []
-        sudo_sub_dir: 'users'
         authorized_public_keys: []
         exclusive_public_keys: False
   roles:
