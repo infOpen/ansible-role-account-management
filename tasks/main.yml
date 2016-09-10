@@ -18,15 +18,6 @@
   when: "{{ ansible_os_family == 'Debian' }}"
 
 
-# Install required packages
-- name: 'Manage RedHat family packages install'
-  include: 'install_redhat.yml'
-  tags:
-    - 'install'
-    - 'user-management'
-  when: "{{ ansible_os_family == 'RedHat' }}"
-
-
 - name: 'Manage account create'
   include: 'create_accounts.yml'
   tags:
