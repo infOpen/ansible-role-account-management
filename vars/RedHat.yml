@@ -3,5 +3,4 @@
 # RedHat specific vars
 
 account_management_packages:
-  - sudo
-
+  - 'sudo'

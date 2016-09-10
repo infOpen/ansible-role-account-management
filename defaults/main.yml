@@ -4,8 +4,8 @@
 
 # List of sudoers.d subdirectory to create
 account_management_sudo_directories:
-  - groups
-  - users
+  - 'groups'
+  - 'users'
 
 # List of groups to create
 #
@@ -51,4 +51,3 @@ account_management_groups: []
 #   - encrypted password can be created by the followin command:
 #       python -c 'import crypt; print crypt.crypt("password", "$1$SomeSalt$")'
 account_management_users: []
-

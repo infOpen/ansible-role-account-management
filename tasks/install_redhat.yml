@@ -8,4 +8,3 @@
     name: "{{ item }}"
     state: 'present'
   with_items: "{{ account_management_packages }}"
-

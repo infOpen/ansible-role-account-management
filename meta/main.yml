@@ -6,7 +6,7 @@ galaxy_info:
   company: 'Infopen (http://infopen.pro)'
   license: 'MIT'
   min_ansible_version: '1.4'
-
+  github_branch: 'master'
   platforms:
     - name: 'Ubuntu'
       versions:
@@ -18,8 +18,10 @@ galaxy_info:
         - 'squeeze'
         - 'wheezy'
         - 'jessy'
-
-  categories:
+    - name: 'EL'
+      versions:
+        - 6
+        - 7
+  galaxy_tags:
     - 'system'
-
 dependencies: []
