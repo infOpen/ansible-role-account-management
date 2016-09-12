@@ -8,3 +8,8 @@
 #Bundler
 .bundle
 
+# Cache & binaries
+.cache
+.tox
+*.pyc
+*.retry

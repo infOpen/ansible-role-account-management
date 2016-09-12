@@ -20,6 +20,8 @@
   with_subelements:
     - "{{ account_management_users }}"
     - 'authorized_public_keys'
+    - flags:
+      skip_missing: true
   tags:
     - 'config'
     - 'user-management'
