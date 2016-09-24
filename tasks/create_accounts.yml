@@ -2,7 +2,7 @@
 
 # Create accounts
 
-- name: Create groups
+- name: 'Create groups'
   become: True
   group:
     name: "{{ item.name }}"
@@ -12,7 +12,7 @@
   with_items: "{{ account_management_groups }}"
 
 
-- name: Create users
+- name: 'Create users'
   become: True
   user:
     append: "{{ item.append | default(True) }}"
@@ -20,14 +20,13 @@
     comment: "{{ item.comment | default('') }}"
     createhome: "{{ item.createhome | default(True) }}"
     group: "{{ item.group | default(omit) }}"
-    groups: "{{ item.groups | join(',') }}"
+    groups: "{{ (item.groups | default([])) | join(',') }}"
     home: "{{ item.home | default(omit) }}"
     password: "{{ item.password | default(False) }}"
     system: "{{ item.is_system | default(False) }}"
     shell: "{{ item.shell | default('/usr/sbin/nologin') }}"
     state: "{{ item.state | default('present') }}"
     remove: "{{ item.remove | default(False) }}"
-    #skeleton: "{{ item.skeleton | default(False) }}"
+    skeleton: "{{ item.skeleton | default(omit) }}"
     uid: "{{ item.uid | default(omit) }}"
   with_items: "{{ account_management_users }}"
-

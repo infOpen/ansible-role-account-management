@@ -1,0 +1,4 @@
+paramiko==2.0.2
+pytest==2.9.2
+testinfra==1.4.2
+tox>=2,<3
