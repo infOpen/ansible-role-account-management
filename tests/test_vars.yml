@@ -22,7 +22,8 @@ account_management_users:
     append: False
     comment: 'Foobar'
     createhome: True
-    home_mode: '0750'
+    home_mode: '0755'
+    home_group: 'my-group2'
     group: 'my-user3'
     groups:
       - 'my-group2'

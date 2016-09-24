@@ -37,7 +37,7 @@ def test_not_existing_user(User):
     assert user.exists is False
 
 
-def test_user_with_default_values(User):
+def test_user_with_default_values(User, File):
     """
     Tests user exists if state is 'present'
     """
@@ -45,6 +45,13 @@ def test_user_with_default_values(User):
     user = User('my-user2')
     assert user.exists is True
     assert user.group == 'my-user2'
+
+    # Home testing
+    assert File('/home/my-user2').exists is True
+    assert File('/home/my-user2').is_directory is True
+    assert File('/home/my-user2').mode == 0o700
+    assert File('/home/my-user2').user == 'my-user2'
+    assert File('/home/my-user2').group == 'my-user2'
 
 
 def test_user_with_custom_values(User, File):
@@ -60,6 +67,13 @@ def test_user_with_custom_values(User, File):
     assert user.groups == ['my-user3', 'my-group2']
     assert user.home == '/var/foo'
     assert user.shell == '/bin/sh'
+
+    # Home testing
+    assert File('/var/foo').exists is True
+    assert File('/var/foo').is_directory is True
+    assert File('/var/foo').mode == 0o755
+    assert File('/var/foo').user == 'my-user3'
+    assert File('/var/foo').group == 'my-group2'
 
     # Skeleton testing
     assert File('/var/foo/foo_bar').exists is True

@@ -7,3 +7,6 @@ account_management_groups: []
 
 # List of users to create
 account_management_users: []
+
+# Default home mode
+account_management_default_home_mode: '0700'
