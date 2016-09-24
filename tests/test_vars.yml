@@ -1,0 +1,38 @@
+---
+
+account_management_groups:
+  - name: 'my-group'
+    gid: 1500
+    state: 'absent'
+    is_system: True
+  - name: 'my-group2'
+    gid: 1500
+    state: 'present'
+    is_system: True
+  - name: 'my-user3'
+    gid: 1501
+    state: 'present'
+    is_system: True
+account_management_users:
+  - name: 'my-user'
+    state: 'absent'
+  - name: 'my-user2'
+    state: 'present'
+  - name: 'my-user3'
+    append: False
+    comment: 'Foobar'
+    createhome: True
+    home_mode: '0750'
+    group: 'my-user3'
+    groups:
+      - 'my-group2'
+    uid: 1501
+    password: 'qsdqdqsd'
+    state: 'present'
+    is_system: True
+    remove: True
+    skeleton: '/skels/foo'
+    home: '/var/foo'
+    shell: '/bin/sh'
+    authorized_public_keys: []
+    exclusive_public_keys: False
