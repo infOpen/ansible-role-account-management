@@ -6,8 +6,8 @@
   include: 'create_accounts.yml'
   no_log: True
   tags:
-    - 'config'
-    - 'user-management'
+    - 'account-management::role'
+    - 'account-management::config'
 
 
 - name: 'Create user authorized-keys file'
@@ -25,13 +25,13 @@
     - flags:
       skip_missing: true
   tags:
-    - 'config'
-    - 'user-management'
+    - 'account-management::role'
+    - 'account-management::config'
 
 
 - name: 'Secure home folders'
   include: 'secure_home.yml'
   no_log: True
   tags:
-    - 'config'
-    - 'user-management'
+    - 'account-management::role'
+    - 'account-management::config'
