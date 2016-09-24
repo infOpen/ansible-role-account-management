@@ -4,6 +4,7 @@
 
 - name: 'Manage account create'
   include: 'create_accounts.yml'
+  no_log: True
   tags:
     - 'config'
     - 'user-management'
@@ -17,6 +18,7 @@
     state: "{{ item.1.state | default('present') }}"
     key_options: "{{ item.1.key_options | default('') }}"
     exclusive: "{{ item.0.exclusive_public_keys | default(True) }}"
+  no_log: True
   with_subelements:
     - "{{ account_management_users }}"
     - 'authorized_public_keys'
@@ -29,6 +31,7 @@
 
 - name: 'Secure home folders'
   include: 'secure_home.yml'
+  no_log: True
   tags:
     - 'config'
     - 'user-management'
