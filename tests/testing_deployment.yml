@@ -4,6 +4,23 @@
 
 - hosts: 'all'
   remote_user: "{{ lookup('env', 'VAGRANT') == 'true' | ternary('vagrant', 'root') }}"
+  pre_tasks:
+    - name: 'Create fake skeleton directories'
+      file:
+        path: "{{ item }}"
+        state: 'directory'
+      changed_when: False
+      with_items:
+        - '/tmp/fake_skel'
+        - '/tmp/fake_skel/foo_bar'
+    - name: 'Create fake skeleton files'
+      file:
+        path: "{{ item }}"
+        state: 'touch'
+      changed_when: False
+      with_items:
+        - '/tmp/fake_skel/foo.test'
+        - '/tmp/fake_skel/foo_bar/.bar.test'
   roles:
     - role: "{{ role_name }}"
   vars:

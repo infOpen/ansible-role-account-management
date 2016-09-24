@@ -31,7 +31,7 @@ account_management_users:
     state: 'present'
     is_system: True
     remove: True
-    skeleton: '/skels/foo'
+    skeleton: '/tmp/fake_skel'
     home: '/var/foo'
     shell: '/bin/sh'
     authorized_public_keys: []
