@@ -44,3 +44,19 @@ def test_user_with_default_values(User):
 
     user = User('my-user2')
     assert user.exists is True
+    assert user.group == 'my-user2'
+
+
+def test_user_with_custom_values(User):
+    """
+    Tests user exists if state is 'present' and custom values
+    """
+
+    user = User('my-user3')
+    assert user.exists is True
+    assert user.uid == 1501
+    assert user.gid == 1501
+    assert user.group == 'my-user3'
+    assert user.groups == ['my-user3', 'my-group2']
+    assert user.home == '/var/foo'
+    assert user.shell == '/bin/sh'
