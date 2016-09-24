@@ -53,5 +53,5 @@ test-vagrant:
 	vagrant up
 	vagrant provision
 	vagrant ssh-config > .vagrant/ssh-config
-	testinfra --hosts=account_management_trusty --ssh-config=.vagrant/ssh-config --noconftest
-	testinfra --hosts=account_management_xenial --ssh-config=.vagrant/ssh-config --noconftest
+	testinfra --hosts=account_management_trusty --ssh-config=.vagrant/ssh-config --noconftest --sudo
+	testinfra --hosts=account_management_xenial --ssh-config=.vagrant/ssh-config --noconftest --sudo
