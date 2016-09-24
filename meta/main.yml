@@ -13,11 +13,12 @@ galaxy_info:
         - 'trusty'
         - 'utopic'
         - 'vivid'
+        - 'xenial'
     - name: 'Debian'
       versions:
         - 'squeeze'
         - 'wheezy'
-        - 'jessy'
+        - 'jessie'
   galaxy_tags:
     - 'system'
 dependencies: []

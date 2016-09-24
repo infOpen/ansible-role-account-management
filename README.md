@@ -96,7 +96,7 @@ None
 
     - hosts: servers
       roles:
-         - { role: achaussier.account-management }
+         - { role: infOpen.account-management }
 
 ## License
 
