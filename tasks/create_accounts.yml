@@ -20,7 +20,7 @@
     comment: "{{ item.comment | default('') }}"
     createhome: "{{ item.createhome | default(True) }}"
     group: "{{ item.group | default(omit) }}"
-    groups: "{{ item.groups | join(',') }}"
+    groups: "{{ (item.groups | default([])) | join(',') }}"
     home: "{{ item.home | default(omit) }}"
     password: "{{ item.password | default(False) }}"
     system: "{{ item.is_system | default(False) }}"
