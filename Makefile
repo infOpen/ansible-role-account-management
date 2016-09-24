@@ -31,10 +31,10 @@ clean-pyc:
 
 
 # Target used to execute tests on all tox environments
-test-all: check-prerequisites check-ssh-vars
-test-all: export SSH_PRIVATE_KEY_PATH = $(SSH_PRIVATE_KEY)
-test-all: export SSH_PUBLIC_KEY_PATH = $(SSH_PUBLIC_KEY)
-test-all:
+test-docker: check-prerequisites check-ssh-vars
+test-docker: export SSH_PRIVATE_KEY_PATH = $(SSH_PRIVATE_KEY)
+test-docker: export SSH_PUBLIC_KEY_PATH = $(SSH_PUBLIC_KEY)
+test-docker:
 	tox
 
 
