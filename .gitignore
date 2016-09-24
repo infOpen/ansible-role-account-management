@@ -2,11 +2,11 @@
 .vagrant
 /test_vagrant.yml
 
+# Log files
+*.log
+
 # Swap files
 *.swp
-
-#Bundler
-.bundle
 
 # Cache & binaries
 .cache
