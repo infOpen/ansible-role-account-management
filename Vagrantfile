@@ -7,6 +7,9 @@ VAGRANTFILE_API_VERSION = "2"
 VMS = {
   :account_management_trusty => {
     :box => 'ubuntu/trusty64'
+  },
+  :account_management_xenial => {
+    :box => 'ubuntu/xenial64'
   }
 }
 
@@ -47,7 +50,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
       # Run Ansible provisioning
       vm_config.vm.provision 'ansible' do |ansible|
-        ansible.playbook = 'test_deployment.yml'
+        ansible.playbook = 'testing_deployment.yml'
         # Enable requirement if role has dependencies
         # ansible.galaxy_role_file = './requirements.yml'
         ansible.extra_vars = {
