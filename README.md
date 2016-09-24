@@ -60,6 +60,7 @@ Follow the possible variables with their default values
   comment      : "Foobar"     # Describe user             (Default : '')
   createhome   : False        # Explicit                  (Default : True)
   home_mode    : 0750         # Permissions for home      (Default : 0700)
+  home_group   : "my-user"    # Home group permission     (Default : primary group)
   group        : "my-user"    # Primary user group        (Default : username)
   groups       : []           # Additionnal groups
   uid          : 1500         # Set the UID               (Default : False)
@@ -70,6 +71,7 @@ Follow the possible variables with their default values
   skeleton     : /skels/foo   # Skeleton used at create   (Default : False)
   home         : "/var/foo"   # Home path  (Default : /home/username)
   shell        : "/bin/sh"    # User shell (Default : /usr/sbin/nologin)
+  secure_home  : True         # Remove home access from other
   authorized_public_keys : [] # Public ssh keys used for authentication
   exclusive_public_keys  : False # Only listed keys exists in authorized-keys
                                  # (Default : True)
@@ -85,7 +87,6 @@ Follow the possible variables with their default values
 ```
       python -c 'import crypt; print crypt.crypt("password", "$1$salt$")'
 ```
-
 
 ## Dependencies
 

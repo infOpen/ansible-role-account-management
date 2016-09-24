@@ -27,46 +27,8 @@
     - 'user-management'
 
 
-- name: 'Get home for each users'
-  become: True
-  shell: "getent passwd {{ item.name | quote }} | cut -d':' -f6"
-  register: 'home_users'
-  changed_when: False
-  with_items: "{{ account_management_users }}"
-  when:
-    - "{{ (item.state | default('present')) == 'present' }}"
-  tags:
-    - 'config'
-    - 'user-management'
-
-
-- name: 'Get primary group for each users'
-  become: True
-  shell: "id -gn {{ item.name | quote }}"
-  register: 'primary_group_users'
-  changed_when: False
-  with_items: "{{ account_management_users }}"
-  when:
-    - "{{ (item.state | default('present')) == 'present' }}"
-  tags:
-    - 'config'
-    - 'user-management'
-
-
-- name: 'Change permissions for user home directory'
-  become: True
-  file:
-    dest: "{{ item.1.stdout }}"
-    group: "{{ item.0.name }}"
-    owner: "{{ item.2.stdout }}"
-    mode: "{{ item.0.home_mode | default('0700') }}"
-  with_together:
-    - "{{ account_management_users }}"
-    - "{{ home_users.results }}"
-    - "{{ primary_group_users.results }}"
-  when:
-    - "{{ account_management_users }}"
-    - "{{ (item.0.state | default('present')) == 'present' }}"
+- name: 'Secure home folders'
+  include: 'secure_home.yml'
   tags:
     - 'config'
     - 'user-management'
