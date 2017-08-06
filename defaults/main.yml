@@ -1,6 +1,6 @@
 ---
 
-# Defaults file for account-management
+# Defaults vars file for account-management role
 
 # List of groups to create
 account_management_groups: []
