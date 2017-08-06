@@ -1,13 +1,26 @@
 ---
 
-# Tests for account-management role
+# Role tests
+
+- hosts: 'account-management-vagrant-xenial64:account-management-docker-xenial'
+  name: 'Install tests prerequisites'
+  gather_facts: False
+  tasks:
+    - name: 'PREREQUISITES | APT | Do an apt-get update'
+      become: True
+      raw: 'apt-get update -qq'
+      changed_when: False
+    - name: 'PREREQUISITES | APT | Install python 2.7'
+      become: True
+      raw: 'apt-get install -qq python2.7'
+      changed_when: False
+
 
 - hosts: 'all'
-  remote_user: "{{ lookup('env', 'VAGRANT') == 'true' | ternary('vagrant', 'root') }}"
   pre_tasks:
     - name: 'Create fake skeleton directories'
       file:
-        path: "{{ item }}"
+        path: "{{ item }}"
         state: 'directory'
       changed_when: False
       with_items:
@@ -15,7 +28,7 @@
         - '/tmp/fake_skel/foo_bar'
     - name: 'Create fake skeleton files'
       file:
-        path: "{{ item }}"
+        path: "{{ item }}"
         state: 'touch'
       changed_when: False
       with_items:
@@ -25,5 +38,3 @@
     - role: "{{ role_name }}"
   vars:
     role_name: "{{ playbook_dir | basename }}"
-  vars_files:
-    - './tests/test_vars.yml'

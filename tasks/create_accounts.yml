@@ -2,7 +2,7 @@
 
 # Create accounts
 
-- name: 'Create groups'
+- name: 'ACCOUNTS | CREATE | Create groups'
   become: True
   group:
     name: "{{ item.name }}"
@@ -12,7 +12,7 @@
   with_items: "{{ account_management_groups }}"
 
 
-- name: 'Create users'
+- name: 'ACCOUNTS | CREATE | Create users'
   become: True
   user:
     append: "{{ item.append | default(True) }}"

@@ -2,47 +2,67 @@
 
 [![Build Status](https://travis-ci.org/infOpen/ansible-role-account-management.svg?branch=master)](https://travis-ci.org/infOpen/ansible-role-account-management)
 
-Manage users and groups, with authorized keys.
+Install account-management package.
 
 ## Requirements
 
-This role requires Ansible 2.0 or higher, and platform requirements are listed
-in the metadata file.
+This role requires Ansible 2.0 or higher,
+and platform requirements are listed in the metadata file.
 
 ## Testing
 
-This role has some testing methods:
+This role use [Molecule](https://github.com/metacloud/molecule/) to run tests.
 
-### Automatically with Travis
+Locally, you can run tests on Docker (default driver) or Vagrant.
+Travis run tests using Docker driver only.
 
-Tests runs automatically on Travis on push, release, pr, ... using docker testing containers
+Currently, tests are done on:
+- Debian Jessie
+- Ubuntu Trusty
+- Ubuntu Xenial
 
-### Locally with Docker
+and use:
+- Ansible 2.0.x
+- Ansible 2.1.x
+- Ansible 2.2.x
+- Ansible 2.3.x
 
-You can use Docker to run tests on ephemeral containers.
+### Running tests
+
+#### Using Docker driver
 
 ```
-make test-docker
+$ tox
 ```
 
-### Locally with Vagrant
-
-You can use Vagrant to run tests on virtual machines.
+#### Using Vagrant driver
 
 ```
-make test-vagrant
+$ MOLECULE_DRIVER=vagrant tox
 ```
 
 ## Role Variables
 
-Follow the possible variables with their default values
+### Default role variables
+
+``` yaml
+# List of groups to create
+account_management_groups: []
+
+# List of users to create
+account_management_users: []
+
+# Default home mode
+account_management_default_home_mode: '0700'
+```
 
 ### List of groups to create
 
 * Variable name: account_management_groups
 * Default value: []
 * Template :
-```
+
+```yaml
 - name         : my-group     # Name of group
   gid          : 1500         # Set the GID       (Default : False)
   state        : absent       # Should exists ?   (Default : present)
@@ -54,7 +74,8 @@ Follow the possible variables with their default values
 * Variable name: account_management_users
 * Default value: []
 * Template :
-```
+
+```yaml
 - name         : my-user      # Name of user
   append       : False        # Add or replace add groups (Default : True)
   comment      : "Foobar"     # Describe user             (Default : '')
@@ -76,15 +97,19 @@ Follow the possible variables with their default values
   exclusive_public_keys  : False # Only listed keys exists in authorized-keys
                                  # (Default : True)
 ```
+
 * Template used for authorized keys entries
-```
+
+```yaml
 - filename : "/etc/public-keys/foo.key"   # Filename where is the public key
   state    : "absent"                     # Used for auth (Default : present))
   key_options : ""                        # Add ssh options for this key
 ```
+
 * Notes :
   - encrypted password can be created by the following command :
-```
+
+```yaml
       python -c 'import crypt; print crypt.crypt("password", "$1$salt$")'
 ```
 
@@ -94,9 +119,11 @@ None
 
 ## Example Playbook
 
-    - hosts: servers
-      roles:
-         - { role: infOpen.account-management }
+``` yaml
+- hosts: servers
+  roles:
+    - { role: infOpen.account-management }
+```
 
 ## License
 
