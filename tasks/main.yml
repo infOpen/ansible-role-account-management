@@ -6,18 +6,19 @@
   include: "{{ role_path }}/tasks/manage_variables.yml"
   tags:
     - 'role::account-management'
+    - 'role::account-management::config'
     - 'role::account-management::init'
 
 
-- name: 'Manage account create'
-  include: 'create_accounts.yml'
+- name: 'ACCOUNTS | CREATE | Create system accounts'
+  include: "{{ role_path }}/tasks/create_accounts.yml"
   no_log: True
   tags:
-    - 'account-management::role'
-    - 'account-management::config'
+    - 'role::account-management'
+    - 'role::account-management::config'
 
 
-- name: 'Create user authorized-keys file'
+- name: 'ACCOUNTS | SSH | Create user authorized-keys file'
   become: True
   authorized_key:
     user: "{{ item.0.name }}"
@@ -32,13 +33,13 @@
     - flags:
       skip_missing: true
   tags:
-    - 'account-management::role'
-    - 'account-management::config'
+    - 'role::account-management'
+    - 'role::account-management::config'
 
 
-- name: 'Secure home folders'
-  include: 'secure_home.yml'
+- name: 'ACCOUNTS | SECURITY | Secure home folders'
+  include: "{{ role_path }}/tasks/secure_home.yml"
   no_log: True
   tags:
-    - 'account-management::role'
-    - 'account-management::config'
+    - 'role::account-management'
+    - 'role::account-management::config'

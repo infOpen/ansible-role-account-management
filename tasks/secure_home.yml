@@ -1,7 +1,7 @@
 ---
 
 
-- name: 'Get home for each users'
+- name: 'ACCOUNTS | SECURITY | Get home for each users'
   become: True
   shell: "getent passwd {{ item.name | quote }} | cut -d':' -f6"
   register: 'home_users'
@@ -11,7 +11,7 @@
     - "{{ (item.state | default('present')) == 'present' }}"
 
 
-- name: 'Get primary group for each users'
+- name: 'ACCOUNTS | SECURITY | Get primary group for each users'
   become: True
   shell: "id -gn {{ item.name | quote }}"
   register: 'primary_group_users'
@@ -21,7 +21,7 @@
     - "{{ (item.state | default('present')) == 'present' }}"
 
 
-- name: 'Change permissions for user home directory'
+- name: 'ACCOUNTS | SECURITY | Change permissions for user home directory'
   become: True
   file:
     dest: "{{ item.1.stdout }}"
