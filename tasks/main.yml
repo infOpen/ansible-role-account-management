@@ -1,6 +1,13 @@
 ---
 
-# Main task file for account-management role
+# Main tasks file for account-management role
+
+- name: 'INIT | Manage variables to use for our target'
+  include: "{{ role_path }}/tasks/manage_variables.yml"
+  tags:
+    - 'role::account-management'
+    - 'role::account-management::init'
+
 
 - name: 'Manage account create'
   include: 'create_accounts.yml'
