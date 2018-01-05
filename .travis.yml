@@ -12,14 +12,13 @@ language: 'python'
 
 env:
   matrix:
-    - TOXENV='py27-ansible20'
-    - TOXENV='py27-ansible21'
     - TOXENV='py27-ansible22'
     - TOXENV='py27-ansible23'
+    - TOXENV='py27-ansible24'
 
 before_install:
   # Create SSH keys
-  -  cat /dev/zero | ssh-keygen -q -N ""
+  - cat /dev/zero | ssh-keygen -q -N ""
 install:
   - 'pip install tox-travis'
 
