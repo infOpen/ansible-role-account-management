@@ -1,6 +1,10 @@
 # account-management
 
-[![Build Status](https://travis-ci.org/infOpen/ansible-role-account-management.svg?branch=master)](https://travis-ci.org/infOpen/ansible-role-account-management)
+[![Build Status](https://img.shields.io/travis/infOpen/ansible-role-account-management/master.svg?label=travis_master)](https://travis-ci.org/infOpen/ansible-role-account-management)
+[![Build Status](https://img.shields.io/travis/infOpen/ansible-role-account-management/develop.svg?label=travis_develop)](https://travis-ci.org/infOpen/ansible-role-account-management)
+[![Updates](https://pyup.io/repos/github/infOpen/ansible-role-account-management/shield.svg)](https://pyup.io/repos/github/infOpen/ansible-role-account-management/)
+[![Python 3](https://pyup.io/repos/github/infOpen/ansible-role-account-management/python-3-shield.svg)](https://pyup.io/repos/github/infOpen/ansible-role-account-management/)
+[![Ansible Role](https://img.shields.io/ansible/role/12337.svg)](https://galaxy.ansible.com/infOpen/account-management/)
 
 Install account-management package.
 
