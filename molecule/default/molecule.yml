@@ -1,0 +1,94 @@
+---
+
+dependency:
+  name: 'galaxy'
+driver:
+  name: 'docker'
+lint:
+  name: 'yamllint'
+platforms:
+  - name: "account-management-docker-centos7"
+    image: 'centos/systemd:latest'
+    command: '/sbin/init'
+    cap_add:
+      - 'SYS_PTRACE'
+    privileged: True
+  - name: "account-management-docker-jessie"
+    image: 'minimum2scp/systemd-jessie:latest'
+    command: '/sbin/init'
+    cap_add:
+      - 'SYS_PTRACE'
+    privileged: True
+  - name: "account-management-docker-stretch"
+    image: 'minimum2scp/systemd-stretch:latest'
+    command: '/sbin/init'
+    cap_add:
+      - 'SYS_PTRACE'
+    privileged: True
+  - name: "account-management-docker-xenial"
+    image: 'solita/ubuntu-systemd:16.04'
+    command: '/sbin/init'
+    cap_add:
+      - 'SYS_PTRACE'
+    privileged: True
+  - name: "account-management-docker-bionic"
+    image: 'solita/ubuntu-systemd:18.04'
+    command: '/sbin/init'
+    cap_add:
+      - 'SYS_PTRACE'
+    privileged: True
+provisioner:
+  name: 'ansible'
+  lint:
+    name: 'ansible-lint'
+  inventory:
+    group_vars:
+      all:
+        account_management_groups:
+          - name: 'my-group'
+            gid: 1500
+            state: 'absent'
+            is_system: True
+          - name: 'my-group2'
+            gid: 1500
+            state: 'present'
+            is_system: True
+          - name: 'my-user3'
+            gid: 1501
+            state: 'present'
+            is_system: True
+        account_management_users:
+          - name: 'my-user'
+            state: 'absent'
+          - name: 'my-user2'
+            state: 'present'
+          - name: 'my-user3'
+            append: False
+            comment: 'Foobar'
+            createhome: True
+            home_mode: '0755'
+            home_group: 'my-group2'
+            group: 'my-user3'
+            groups:
+              - 'my-group2'
+            uid: 1501
+            password: 'qsdqdqsd'
+            state: 'present'
+            is_system: True
+            remove: True
+            skeleton: '/tmp/fake_skel'
+            home: '/var/foo'
+            shell: '/bin/sh'
+            authorized_public_keys: []
+            exclusive_public_keys: False
+    host_vars: {}
+scenario:
+  name: 'default'
+verifier:
+  name: 'testinfra'
+  additional_files_or_dirs:
+    - '../../tests'
+  lint:
+    name: 'flake8'
+  options:
+    sudo: True
