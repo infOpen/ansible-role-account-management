@@ -88,6 +88,7 @@ account_management_default_home_mode: '0700'
   append       : False        # Add or replace add groups (Default : True)
   comment      : "Foobar"     # Describe user             (Default : '')
   createhome   : False        # Explicit                  (Default : True)
+  expire       : 1486509032   # Expire account at this ts (Default : omit)
   home_mode    : 0750         # Permissions for home      (Default : 0700)
   home_group   : "my-user"    # Home group permission     (Default : primary group)
   group        : "my-user"    # Primary user group        (Default : username)
