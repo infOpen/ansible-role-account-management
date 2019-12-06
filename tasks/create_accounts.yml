@@ -19,7 +19,7 @@
     name: "{{ item.name }}"
     comment: "{{ item.comment | default('') }}"
     createhome: "{{ item.createhome | default(True) }}"
-    expire: "{{ item.expire | default(omit) }}"
+    expires: "{{ item.expires | default(omit) }}"
     group: "{{ item.group | default(omit) }}"
     groups: "{{ (item.groups | default([])) | join(',') }}"
     home: "{{ item.home | default(omit) }}"
