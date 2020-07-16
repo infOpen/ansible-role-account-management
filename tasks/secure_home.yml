@@ -3,7 +3,11 @@
 
 - name: 'ACCOUNTS | SECURITY | Get home for each users'
   become: True
-  shell: "getent passwd {{ item.name | quote }} | cut -d':' -f6"
+  shell: |
+    set -o pipefail
+    getent passwd {{ item.name | quote }} | cut -d':' -f6
+  args:
+    executable: '/bin/bash'
   register: 'home_users'
   changed_when: False
   with_items: "{{ account_management_users }}"
@@ -12,7 +16,7 @@
 
 - name: 'ACCOUNTS | SECURITY | Get primary group for each users'
   become: True
-  shell: "id -gn {{ item.name | quote }}"
+  command: "id -gn {{ item.name | quote }}"
   register: 'primary_group_users'
   changed_when: False
   with_items: "{{ account_management_users }}"
