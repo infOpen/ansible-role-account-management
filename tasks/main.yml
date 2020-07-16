@@ -11,7 +11,7 @@
 
 
 - name: 'ACCOUNTS | CREATE | Create system accounts'
-  include: "{{ role_path }}/tasks/create_accounts.yml"
+  include_tasks: "{{ role_path }}/tasks/create_accounts.yml"
   no_log: True
   tags:
     - 'role::account-management'
