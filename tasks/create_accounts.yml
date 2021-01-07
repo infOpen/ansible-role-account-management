@@ -23,7 +23,7 @@
     group: "{{ item.group | default(omit) }}"
     groups: "{{ (item.groups | default([])) | join(',') }}"
     home: "{{ item.home | default(omit) }}"
-    move_home : "{{ item.move_home | default(omit) }}"
+    move_home: "{{ item.move_home | default(omit) }}"
     password: "{{ item.password | default(False) }}"
     password_lock: "{{ item.password_lock | default(omit) }}"
     system: "{{ item.is_system | default(False) }}"
