@@ -87,6 +87,7 @@ account_management_default_home_mode: '0700'
   append       : False        # Add or replace add groups (Default : True)
   comment      : "Foobar"     # Describe user             (Default : '')
   createhome   : False        # Explicit                  (Default : True)
+  move_home    : True         # Explicit                  (Default : False)
   expires      : 1486509032   # Expire account at this ts (Default : omit)
   home_mode    : 0750         # Permissions for home      (Default : 0700)
   home_group   : "my-user"    # Home group permission     (Default : primary group)
@@ -94,6 +95,7 @@ account_management_default_home_mode: '0700'
   groups       : []           # Additionnal groups
   uid          : 1500         # Set the UID               (Default : False)
   password     : "qsdqdqsd"   # Encrypted password        (Default : False)
+  password_lock: True         # Lock the password         (Default : False)
   state        : absent       # Should exists ?           (Default : present)
   is_system    : True         # Is system user ?          (Default : False)
   remove       : True         # Should be removed ?       (Default : False)
