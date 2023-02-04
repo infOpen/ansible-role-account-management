@@ -37,3 +37,4 @@
   when:
     - "account_management_users"
     - "(item.0.state | default('present')) == 'present'"
+    - "item.0.secure_home | default(True)"

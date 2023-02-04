@@ -102,7 +102,7 @@ account_management_default_home_mode: '0700'
   skeleton     : /skels/foo   # Skeleton used at create   (Default : False)
   home         : "/var/foo"   # Home path  (Default : /home/username)
   shell        : "/bin/sh"    # User shell (Default : /usr/sbin/nologin)
-  secure_home  : True         # Remove home access from other
+  secure_home  : True         # Remove home access from other (Default : True)
   authorized_public_keys : [] # Public ssh keys used for authentication
   exclusive_public_keys  : False # Only listed keys exists in authorized-keys
                                  # (Default : True)
